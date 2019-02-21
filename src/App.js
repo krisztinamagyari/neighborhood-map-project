@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import Header from './components/Header'
 import axios from 'axios'
 
 class App extends Component {
@@ -88,6 +88,7 @@ class App extends Component {
   render() {
     return (
       <main>
+        <div id="header"><Header /></div>
         <div id="map"></div>
       </main>
     );
