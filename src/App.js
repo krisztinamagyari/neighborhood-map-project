@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import axios from 'axios'
 
-
-
 class App extends Component {
-
   state = {
     venues: []
   }
@@ -43,21 +39,34 @@ class App extends Component {
   }
 
   initMap = () => {
-        const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: 47.532, lng: 21.624},
-          zoom: 13
-        });
+    //Creating map
+    const map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: 47.532, lng: 21.624},
+      zoom: 13
+    });
 
-        this.state.venues.map(myVenue => {
-          const marker = new window.google.maps.Marker({
-            position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
-            map: map,
-            title: myVenue.venue.name
-          });
-        })
+    //Creating infowindow
+    const infowindow = new window.google.maps.InfoWindow();
 
+    //Displaying markers
+    this.state.venues.map(myVenue => {
+      const contentString = `${myVenue.venue.name}`
 
+      //Creating marker
+      const marker = new window.google.maps.Marker({
+        position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
+        map: map,
+        title: myVenue.venue.name
+      });
 
+      marker.addListener('click', function() {
+        //Change content
+        infowindow.setContent(contentString);
+
+        //Opening the info window when clicking on the marker
+        infowindow.open(map, marker);
+      });
+    })
   }
 
   render() {
@@ -68,11 +77,6 @@ class App extends Component {
     );
   }
 }
-
-{/*
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-      async defer></script>
-  */}
 
 function loadScript(url) {
   var index = window.document.getElementsByTagName("script")[0]
