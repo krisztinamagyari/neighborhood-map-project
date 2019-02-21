@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
 class App extends Component {
   componentDidMount() {
     this.loadMap()
@@ -14,8 +15,8 @@ class App extends Component {
 
   initMap = () => {
         const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          center: {lat: 47.532, lng: 21.624},
+          zoom: 13
         });
   }
 
