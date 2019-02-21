@@ -27,6 +27,10 @@ class App extends Component {
       v: "20182507"
     }
 
+    /*
+    * axios does the same thing as a FETCH API
+    * Reference: https://github.com/axios/axios
+    */
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
         this.setState({
@@ -34,12 +38,13 @@ class App extends Component {
         }, this.loadMap())
       })
       .catch(error => {
-        console.log("Error" + error)
+        alert(`Sorry, data from Foursquare couldn't be fetched!`)
+        console.log("Data fetching error" + error)
       })
   }
 
   initMap = () => {
-    //Creating map
+    //Creating map, center is in Debrecen, Hungary
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 47.532, lng: 21.624},
       zoom: 13
@@ -50,21 +55,32 @@ class App extends Component {
 
     //Displaying markers
     this.state.venues.map(myVenue => {
-      const contentString = `${myVenue.venue.name}`
+      /*
+      *Reference: https://developers.google.com/maps/documentation/javascript/infowindows
+      *Content of the infowindow
+      */
+      const contentString = `${myVenue.venue.name}<br><i>${myVenue.venue.location.address}</i>
+      <br><br><i>Data provided by Foursquare.</i>`
 
       //Creating marker
       const marker = new window.google.maps.Marker({
         position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
         map: map,
+        animation: window.google.maps.Animation.DROP,
         title: myVenue.venue.name
       });
 
+      function animationEffect() {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE)
+        setTimeout(function(){ marker.setAnimation(null) }, 550)
+      }
+
       marker.addListener('click', function() {
         //Change content
-        infowindow.setContent(contentString);
-
+        infowindow.setContent(contentString)
+        animationEffect()
         //Opening the info window when clicking on the marker
-        infowindow.open(map, marker);
+        infowindow.open(map, marker)
       });
     })
   }
