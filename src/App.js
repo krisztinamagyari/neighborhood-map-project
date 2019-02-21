@@ -2,15 +2,45 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import axios from 'axios'
+
+
 
 class App extends Component {
+
+  state = {
+    venues: []
+  }
+
   componentDidMount() {
+    this.getVenues()
     this.loadMap()
   }
 
   loadMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDfXBPz9Ztl2ce-MXmHrLb9s5bEvkup2Z4&callback=initMap")
     window.initMap = this.initMap
+  }
+
+  getVenues = () => {
+    const endPoint = "https://api.foursquare.com/v2/venues/explore?"
+    const parameters = {
+      client_id: "VLS11PS32XOIVKIKN5PZDC0XHT54T5EIGRDDYIMKDIEYQLBU",
+      client_secret: "QHKRPNJY24ARGZ3DW5KH45STRZRXA3DUVYFBDP2I1P3UN3Y0",
+      query: "school",
+      near: "Debrecen",
+      v: "20182507"
+    }
+
+    axios.get(endPoint + new URLSearchParams(parameters))
+      .then(response => {
+        this.setState({
+          venues: response.data.response.groups[0].items
+        })
+      })
+      .catch(error => {
+        console.log("Error" + error)
+      })
   }
 
   initMap = () => {
