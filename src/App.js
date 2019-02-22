@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import Header from './components/Header'
+import Search from './components/Search'
 import axios from 'axios'
 
 class App extends Component {
   state = {
-    venues: []
+    allVenues: [],
+    venues: [],
+    markers: []
   }
 
   componentDidMount() {
@@ -34,6 +37,7 @@ class App extends Component {
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
         this.setState({
+          allVenues: response.data.response.groups[0].items,
           venues: response.data.response.groups[0].items
         }, this.loadMap())
       })
@@ -48,28 +52,33 @@ class App extends Component {
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 47.532, lng: 21.624},
       zoom: 13
-    });
+    })
 
     //Creating infowindow
-    const infowindow = new window.google.maps.InfoWindow();
+    let infowindow = new window.google.maps.InfoWindow()
 
     //Displaying markers
-    this.state.venues.map(myVenue => {
+    this.state.venues.map((myVenue) => {
       /*
       *Reference: https://developers.google.com/maps/documentation/javascript/infowindows
       *Content of the infowindow
       */
-      const contentString = `${myVenue.venue.name}<br><i>${myVenue.venue.location.address}</i>
-      <br><br><i>Data provided by Foursquare.</i>`
+      let contentString = `
+        <h2>${myVenue.venue.name}</h2>
+        <p>Address: ${myVenue.venue.location.address}</p>
+        <p>Data provided by Foursquare.</p>`
 
       //Creating marker
-      const marker = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
         map: map,
         animation: window.google.maps.Animation.DROP,
         title: myVenue.venue.name
-      });
+      })
 
+      this.state.markers.push(marker)
+
+      //Adding animation to the marker
       function animationEffect() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE)
         setTimeout(function(){ marker.setAnimation(null) }, 550)
@@ -81,17 +90,28 @@ class App extends Component {
         animationEffect()
         //Opening the info window when clicking on the marker
         infowindow.open(map, marker)
-      });
+      })
     })
+  }
+
+  updateVenues = (newVenues) => {
+    this.setState({venues: newVenues})
   }
 
   render() {
     return (
-      <main>
+      <div>
         <div id="header"><Header /></div>
-        <div id="map"></div>
-      </main>
-    );
+        <main>
+          <Search
+            venues={this.state.allVenues}
+            markers={this.state.markers}
+            updateVenues={this.state.updateVenues}
+          />
+          <div id="map"></div>
+        </main>
+      </div>
+    )
   }
 }
 
