@@ -39,24 +39,39 @@ html, body {
   padding: 0;
 }
 
+aside .search-result li {
+  padding: 0.5rem;
+  background-color: #367588;
+  color: #fdfdfd;
+  list-style-type: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+aside .search-result {
+  max-height: calc(35vh);
+  overflow-y: scroll;
+}
+
+#footer {
+  padding: 0.2rem;
+  background-color: #000;
+  color: #fdfdfd;
+  text-align: center;
+}
+
+#searchbar {
+  padding: 10px;
+}
+
+#searchQuery {
+  margin: 15px;
+}
+
 #map {
   height: 100vh;
 }
 
 #header {
   text-align:center;
-}
-
-.toggle-menu {
-    position: absolute;
-    display: none;
-    line-height: 1.9rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-}
-
-@media all and (max-width: 767px) {
-    .toggle-menu {
-        display: block
-    }
 }

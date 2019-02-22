@@ -63,7 +63,7 @@ class Search extends Component {
 
         {this.state.venues.length === 0 && (
           <ul className="search-result">
-            <li className="item">No place found.</li>
+            <li className="item">No place found yet.</li>
           </ul>
         )}
 

@@ -104,11 +104,13 @@ class App extends Component {
       <div>
         <div id="header"><Header /></div>
         <main>
-          <Search
-            venues={this.state.allVenues}
-            markers={this.state.markers}
-            updateVenues={this.state.updateVenues}
-          />
+          <div id="searchbar">
+            <Search
+              venues={this.state.allVenues}
+              markers={this.state.markers}
+              updateVenues={this.state.updateVenues}
+            />
+          </div>
           <div id="map"></div>
         </main>
         <div id="footer"><Footer /></div>
