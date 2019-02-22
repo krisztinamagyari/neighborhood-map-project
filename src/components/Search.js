@@ -36,11 +36,11 @@ class Search extends Component {
     return (
       <aside>
         <div className="search-form">
-          <label htmlFor="searchQuery">Find a school!</label>
+          <label>Find a school!</label>
           <input
             id="searchQuery"
             type="text"
-            placeholder="Search Here"
+            placeholder="Search..."
             onChange={(e) => this.updateQuery(e.target.value)}
             value={this.state.query}
           />

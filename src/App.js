@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Search from './components/Search'
 import axios from 'axios'
 
@@ -110,6 +111,7 @@ class App extends Component {
           />
           <div id="map"></div>
         </main>
+        <div id="footer"><Footer /></div>
       </div>
     )
   }
