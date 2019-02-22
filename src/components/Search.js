@@ -51,7 +51,7 @@ class Search extends Component {
             {this.state.venues.map((myVenue, index) => (
               <li
                 key={index}
-                tabindex={index}
+                tabIndex={index}
                 className="item"
                 onClick={() => this.markerTrigger(myVenue.venue.name)}
               >

@@ -6,12 +6,7 @@ It is a single page application made by React. It shows schools in the city of D
 The application uses [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) to display a map, and [Foursquare API](https://developer.foursquare.com) to get info about the places.
 
 ## Screenshots
-
-Main page with 3 shelves
-![Main page with the 3 shelves](src/images/screenshot2.png)
-
-Search page with searching for the word Drama
-![Search page with searching for Drama](src/images/screenshot1.png)
+![Screenshot of neighborhood map project](src/screenshot.png)
 
 ## Prerequisites
 * [nmp](https://www.npmjs.com/)
@@ -29,7 +24,8 @@ This opens [localhost:3000](localhost:3000) in your browser window.
 
 ## Resources used to create the application
 * This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md)
-* Study session by [Doug Brown](https://www.youtube.com/watch?v=OcL7-7cRpkQ&feature=youtu.be)
+* Study session by [Doug Brown](https://www.youtube.com/watch?v=NVAVLCJwAAo&feature=youtu.be)
+* Study sesssion by [Elharony](https://www.youtube.com/watch?v=ywdxLNjhBYw) which was a great help for me not to overcomplicate this project
 * [React documentation](https://reactjs.org/)
 * Slack channel of fellow Udacity students
 
